@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Student Finance Tracker</title>
+        <link rel="stylesheet" type="text/css" href="styles/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+
+    <body>
+        <header>
+            <h1>Student Finance Tracker</h1>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="transactions.html">Transactions</a></li>
+                    <li><a href="reports.html">Reports</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><button id="settings"><i class="fa-solid fa-gear"></i></button></li>
+                </ul>
+                <section class="setting hidden">
+                    <button id="addBudget">+ Set Budget</button>
+                    <button id="setCurrency">Change Currency</button>
+                </section>
+                <section class="budget-form hidden" id="budgetForm">
+                    <form id="budget-form">
+                        <h2>Set Your Budget</h2>
+
+                        <label for="budget-start">Start Date:<br>
+                            <input type="date" id="budget-start" name="budget-start" required>
+                        </label><br><br>
+
+                        <label for="budget-end">End Date:<br>
+                            <input type="date" id="budget-end" name="budget-end" required>
+                        </label><br><br>
+
+                        <label for="budget-food">Food:<br>
+                            <input type="number" id="budget-food" placeholder="Enter amount" required>
+                        </label><br><br>
+
+                        <label for="budget-books">Books:<br>
+                            <input type="number" id="budget-books" placeholder="Enter amount" required>
+                        </label><br><br>
+
+                        <label for="budget-transport">Transport:<br>
+                            <input type="number" id="budget-transport" placeholder="Enter amount" required>
+                        </label><br><br>
+
+                        <label for="budget-entertainment">Entertainment:<br>
+                            <input type="number" id="budget-entertainment" placeholder="Enter amount" required>
+                        </label><br><br>
+
+                        <label for="budget-fees">Fees:<br>
+                            <input type="number" id="budget-fees" placeholder="Enter amount" required>
+                        </label><br><br>
+
+                        <label for="budget-others">Others:<br>
+                            <input type="number" id="budget-others" placeholder="Enter amount" required>
+                        </label><br><br>
+
+                        <button type="submit">Save Budget</button>
+                        <button type="reset" id="budgetCancel">Cancel</button>
+                    </form>
+                </section>
+
+                <section class="message-popup hidden" id="budgetMessagePopup">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <p id="budgetMessage">Budget Saved!</p>
+                    <button id="closeBudgetPopup">Ok</button>
+                </section>
+            </nav>
+        </header>
+        <main>
+            <section class="summary-cards">
+                <div class="card">
+                    <h2>Food:</h2>
+                    <p>0 Rwf</p> 
+                </div>
+                <div class="card">
+                    <h2>Books:</h2>
+                    <p>0 Rwf</p>
+                </div>
+                <div class="card">
+                    <h2>Transport:</h2>
+                    <p>0 Rwf</p> 
+                </div>
+                <div class="card">
+                    <h2>Entertainment:</h2>
+                    <p>0 Rwf</p>
+                </div>
+                <div class="card">
+                    <h2>Fees:</h2>
+                    <p>0 Rwf</p>
+                </div>
+                <div class="card">
+                    <h2>Others:</h2>
+                    <p>0 Rwf</p>
+                </div>
+                
+            </section>
+            <button id="addTransaction" style="margin-left: 32%;">+ Add Expense</button> 
+            <section class="expense-form hidden" id="expenseForm">
+                <form id="transaction-form">
+                    <h2>Add New Expense</h2>
+                    <label for="category">Category:<br>
+                        <select id="category" name="category" required>
+                            <option value="" disabled selected>
+                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -----Choose a Category-----
+                            </option>
+                            <option value="food">Food</option>
+                            <option value="books">Books</option>
+                            <option value="transport">Transport</option>
+                            <option value="entertainment">Entertainment</option>
+                            <option value="fees">Fees</option>
+                            <option value="others">Others</option>
+                        </select>
+                    </label><br><br>
+                    <label for="description">Description:<br>
+                        <input type="text" placeholder="Describe your Expense..." id="description" name="description">
+                        <span id="descriptionNote"></span>
+                    </label><br><br>
+                    <label for="amount">Amount:<br>
+                        <span id="currency" style="color: black; font-size: 1.2rem; margin-left: 1rem;">Rwf</span>
+                        <input type="number" placeholder="Enter Amount..." id="amount" name="amount" >
+                        <span id="amountNote"></span>
+                    </label><br><br>
+                    <label for="data">Date:<br>
+                        <input type="date" id="date" name="date">
+                        <span id="dateNote"></span> 
+                    </label><br><br>
+                    <button type="submit">Save</button>
+                    <button type="reset">Reset</button>
+                    <button type="reset" id="cancel">Cancel</button>
+                </form>
+            </section>
+            <section class="summary-visuals">
+                <div class="chart" id="spending-trend-chart">
+                    <canvas id="totalBudgetChart"></canvas>
+                </div>
+                <div class="breakdown" id="key-breakdown">
+                    <h2>Key Breakdown</h2>
+                    <ul>
+                        <li>Budgeted Amount: 0 Rwf</li>
+                        <li>Amount Spent: 0 Rwf</li>
+                    </ul>
+                    <p aria-live="polite" id="notification-container"></p>
+                </div>
+            </section>
+            <section class="recent-transactions">
+                <div class="table-header">
+                    <h2>Recent Transactions</h2>
+                    <div class="search-container">
+                        <i class="fa-solid fa-magnifying-glass-dollar"></i>
+                        <input type="text" placeholder="Search Transactions" id="myInput">  
+                    </div>                 
+                </div>
+                <div class="table_body">
+                    <table id="transactionTable">
+                        <thead>
+                            <tr>
+                                <th>Date<span class="icon-arrow">&UpArrow;</span></th>
+                                <th>Description<span class="icon-arrow">&UpArrow;</span></th>
+                                <th>Category<span class="icon-arrow">&UpArrow;</span></th>
+                                <th>Amount<span class="icon-arrow">&UpArrow;</span></th>
+                                <th></th>
+                            </tr> 
+                        </thead>
+                        <tbody id="transaction-list">
+                            <!-- Placeholder for recent transactions -->
+                            <tr>
+                                <td>2024-01-01</td>
+                                <td>Sample Transaction 1</td>
+                                <td>Food</td>
+                                <td>500 Rwf</td>
+                                <td><i class="fa-solid fa-pencil"></i>&nbsp;&nbsp;<i class="fa-solid fa-trash"></i></td>
+                            </tr>
+                            <tr>
+                                <td>2024-01-02</td>
+                                <td>Sample Transaction 2</td>
+                                <td>Books</td>
+                                <td>1500 Rwf</td>
+                            </tr>
+                            <tr>
+                                <td>2024-01-03</td>
+                                <td>Sample Transaction 3</td>
+                                <td>Transport</td>
+                                <td>300 Rwf</td>
+                            </tr>
+                            <tr>
+                                <td>2024-01-04</td>
+                                <td>Sample Transaction 4</td>
+                                <td>Entertainment</td>
+                                <td>800 Rwf</td>
+                            </tr>
+                            <tr>
+                                <td>2024-01-05</td>
+                                <td>Sample Transaction 5</td>
+                                <td>Fees</td>
+                                <td>2000 Rwf</td>
+                            </tr>
+                            <tr>
+                                <td>2024-01-06</td>
+                                <td>Sample Transaction 6</td>
+                                <td>Others</td>
+                                <td>400 Rwf</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+        <footer >
+            <p>&copy; 2025 Student Finance Tracker. All rights reserved.</p>
+        </footer>
+        <script type="module" src="scripts/main.js"></script>
+    </body>
+</html>

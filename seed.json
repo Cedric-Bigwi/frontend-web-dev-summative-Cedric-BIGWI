@@ -1,0 +1,902 @@
+ [
+  {
+    "id": "txn_1",
+    "description": "Paid university tuition fee",
+    "amount": 92.27,
+    "category": "Fees",
+    "date": "2024-10-04",
+    "createdAt": "2024-10-05T11:27:00Z",
+    "updatedAt": "2024-10-06T14:20:00Z"
+  },
+  {
+    "id": "txn_2",
+    "description": "Taxi from city center",
+    "amount": 14.74,
+    "category": "Transport",
+    "date": "2024-10-08",
+    "createdAt": "2024-10-10T19:24:00Z",
+    "updatedAt": "2024-10-13T19:55:00Z"
+  },
+  {
+    "id": "txn_3",
+    "description": "Online course materials",
+    "amount": 62.1,
+    "category": "Books",
+    "date": "2024-10-11",
+    "createdAt": "2024-10-13T20:33:00Z",
+    "updatedAt": "2024-10-16T21:07:00Z"
+  },
+  {
+    "id": "txn_4",
+    "description": "Bought stationery",
+    "amount": 6.16,
+    "category": "Other",
+    "date": "2024-10-15",
+    "createdAt": "2024-10-15T14:13:00Z",
+    "updatedAt": "2024-10-18T16:44:00Z"
+  },
+  {
+    "id": "txn_5",
+    "description": "Library membership renewal",
+    "amount": 105.42,
+    "category": "Books",
+    "date": "2024-10-19",
+    "createdAt": "2024-10-20T13:09:00Z",
+    "updatedAt": "2024-10-21T16:28:00Z"
+  },
+  {
+    "id": "txn_6",
+    "description": "Semester registration fee",
+    "amount": 54.48,
+    "category": "Fees",
+    "date": "2024-10-22",
+    "createdAt": "2024-10-22T12:59:00Z",
+    "updatedAt": "2024-10-23T15:39:00Z"
+  },
+  {
+    "id": "txn_7",
+    "description": "Lunch at cafeteria",
+    "amount": 24.53,
+    "category": "Food",
+    "date": "2024-10-26",
+    "createdAt": "2024-10-28T19:04:00Z",
+    "updatedAt": "2024-10-29T19:59:00Z"
+  },
+  {
+    "id": "txn_8",
+    "description": "Movie night with friends",
+    "amount": 19.97,
+    "category": "Entertainment",
+    "date": "2024-10-30",
+    "createdAt": "2024-10-30T13:16:00Z",
+    "updatedAt": "2024-10-30T13:22:00Z"
+  },
+  {
+    "id": "txn_9",
+    "description": "Campus event entry fee",
+    "amount": 58.39,
+    "category": "Entertainment",
+    "date": "2024-11-02",
+    "createdAt": "2024-11-02T22:32:00Z",
+    "updatedAt": "2024-11-05T01:27:00Z"
+  },
+  {
+    "id": "txn_10",
+    "description": "Semester registration fee",
+    "amount": 167.59,
+    "category": "Fees",
+    "date": "2024-11-06",
+    "createdAt": "2024-11-06T16:14:00Z",
+    "updatedAt": "2024-11-06T17:23:00Z"
+  },
+  {
+    "id": "txn_11",
+    "description": "Snacks during study session",
+    "amount": 5.37,
+    "category": "Food",
+    "date": "2024-11-10",
+    "createdAt": "2024-11-11T21:44:00Z",
+    "updatedAt": "2024-11-14T00:52:00Z"
+  },
+  {
+    "id": "txn_12",
+    "description": "Python programming book",
+    "amount": 41.98,
+    "category": "Books",
+    "date": "2024-11-13",
+    "createdAt": "2024-11-15T07:52:00Z",
+    "updatedAt": "2024-11-17T08:01:00Z"
+  },
+  {
+    "id": "txn_13",
+    "description": "Campus event entry fee",
+    "amount": 23.51,
+    "category": "Entertainment",
+    "date": "2024-11-17",
+    "createdAt": "2024-11-17T22:47:00Z",
+    "updatedAt": "2024-11-19T01:04:00Z"
+  },
+  {
+    "id": "txn_14",
+    "description": "Dinner with friends",
+    "amount": 13.29,
+    "category": "Food",
+    "date": "2024-11-20",
+    "createdAt": "2024-11-22T16:12:00Z",
+    "updatedAt": "2024-11-22T17:32:00Z"
+  },
+  {
+    "id": "txn_15",
+    "description": "Campus shuttle fee",
+    "amount": 16.84,
+    "category": "Transport",
+    "date": "2024-11-24",
+    "createdAt": "2024-11-26T17:20:00Z",
+    "updatedAt": "2024-11-28T18:53:00Z"
+  },
+  {
+    "id": "txn_16",
+    "description": "Late night taxi",
+    "amount": 11.28,
+    "category": "Transport",
+    "date": "2024-11-28",
+    "createdAt": "2024-11-29T21:38:00Z",
+    "updatedAt": "2024-12-01T00:02:00Z"
+  },
+  {
+    "id": "txn_17",
+    "description": "Semester registration fee",
+    "amount": 177.97,
+    "category": "Fees",
+    "date": "2024-12-01",
+    "createdAt": "2024-12-01T14:49:00Z",
+    "updatedAt": "2024-12-03T17:36:00Z"
+  },
+  {
+    "id": "txn_18",
+    "description": "Lunch at cafeteria",
+    "amount": 3.84,
+    "category": "Food",
+    "date": "2024-12-05",
+    "createdAt": "2024-12-05T21:46:00Z",
+    "updatedAt": "2024-12-05T23:47:00Z"
+  },
+  {
+    "id": "txn_19",
+    "description": "Monthly bus card",
+    "amount": 19.9,
+    "category": "Transport",
+    "date": "2024-12-09",
+    "createdAt": "2024-12-10T17:31:00Z",
+    "updatedAt": "2024-12-10T18:26:00Z"
+  },
+  {
+    "id": "txn_20",
+    "description": "Campus event entry fee",
+    "amount": 4.87,
+    "category": "Entertainment",
+    "date": "2024-12-12",
+    "createdAt": "2024-12-14T20:29:00Z",
+    "updatedAt": "2024-12-15T22:02:00Z"
+  },
+  {
+    "id": "txn_21",
+    "description": "Campus shuttle fee",
+    "amount": 22.79,
+    "category": "Transport",
+    "date": "2024-12-16",
+    "createdAt": "2024-12-18T21:40:00Z",
+    "updatedAt": "2024-12-20T22:26:00Z"
+  },
+  {
+    "id": "txn_22",
+    "description": "Bought stationery",
+    "amount": 1.06,
+    "category": "Other",
+    "date": "2024-12-20",
+    "createdAt": "2024-12-21T06:24:00Z",
+    "updatedAt": "2024-12-24T09:55:00Z"
+  },
+  {
+    "id": "txn_23",
+    "description": "Movie night with friends",
+    "amount": 45.33,
+    "category": "Entertainment",
+    "date": "2024-12-23",
+    "createdAt": "2024-12-25T17:00:00Z",
+    "updatedAt": "2024-12-25T20:09:00Z"
+  },
+  {
+    "id": "txn_24",
+    "description": "Street food dinner",
+    "amount": 29.22,
+    "category": "Food",
+    "date": "2024-12-27",
+    "createdAt": "2024-12-27T10:16:00Z",
+    "updatedAt": "2024-12-27T11:47:00Z"
+  },
+  {
+    "id": "txn_25",
+    "description": "Taxi from city center",
+    "amount": 22.52,
+    "category": "Transport",
+    "date": "2024-12-31",
+    "createdAt": "2024-12-31T06:57:00Z",
+    "updatedAt": "2025-01-02T10:02:00Z"
+  },
+  {
+    "id": "txn_26",
+    "description": "Campus event entry fee",
+    "amount": 49.43,
+    "category": "Entertainment",
+    "date": "2025-01-03",
+    "createdAt": "2025-01-04T12:29:00Z",
+    "updatedAt": "2025-01-06T13:25:00Z"
+  },
+  {
+    "id": "txn_27",
+    "description": "Bought stationery",
+    "amount": 13.48,
+    "category": "Other",
+    "date": "2025-01-07",
+    "createdAt": "2025-01-07T12:11:00Z",
+    "updatedAt": "2025-01-10T15:48:00Z"
+  },
+  {
+    "id": "txn_28",
+    "description": "Printing project report",
+    "amount": 9.23,
+    "category": "Other",
+    "date": "2025-01-10",
+    "createdAt": "2025-01-11T16:52:00Z",
+    "updatedAt": "2025-01-11T19:30:00Z"
+  },
+  {
+    "id": "txn_29",
+    "description": "Online course materials",
+    "amount": 39.22,
+    "category": "Books",
+    "date": "2025-01-14",
+    "createdAt": "2025-01-14T16:49:00Z",
+    "updatedAt": "2025-01-16T17:00:00Z"
+  },
+  {
+    "id": "txn_30",
+    "description": "Paid university tuition fee",
+    "amount": 53.05,
+    "category": "Fees",
+    "date": "2025-01-18",
+    "createdAt": "2025-01-19T06:53:00Z",
+    "updatedAt": "2025-01-21T10:31:00Z"
+  },
+  {
+    "id": "txn_31",
+    "description": "Street food dinner",
+    "amount": 25.52,
+    "category": "Food",
+    "date": "2025-01-21",
+    "createdAt": "2025-01-23T22:17:00Z",
+    "updatedAt": "2025-01-23T23:42:00Z"
+  },
+  {
+    "id": "txn_32",
+    "description": "Campus shuttle fee",
+    "amount": 16.18,
+    "category": "Transport",
+    "date": "2025-01-25",
+    "createdAt": "2025-01-27T17:25:00Z",
+    "updatedAt": "2025-01-28T17:28:00Z"
+  },
+  {
+    "id": "txn_33",
+    "description": "Printing project report",
+    "amount": 6.03,
+    "category": "Other",
+    "date": "2025-01-29",
+    "createdAt": "2025-01-29T12:20:00Z",
+    "updatedAt": "2025-01-29T15:09:00Z"
+  },
+  {
+    "id": "txn_34",
+    "description": "Taxi from city center",
+    "amount": 12.55,
+    "category": "Transport",
+    "date": "2025-02-01",
+    "createdAt": "2025-02-01T17:17:00Z",
+    "updatedAt": "2025-02-01T17:51:00Z"
+  },
+  {
+    "id": "txn_35",
+    "description": "Campus shuttle fee",
+    "amount": 8.65,
+    "category": "Transport",
+    "date": "2025-02-05",
+    "createdAt": "2025-02-05T21:17:00Z",
+    "updatedAt": "2025-02-05T22:54:00Z"
+  },
+  {
+    "id": "txn_36",
+    "description": "Printing project report",
+    "amount": 3.09,
+    "category": "Other",
+    "date": "2025-02-09",
+    "createdAt": "2025-02-09T21:15:00Z",
+    "updatedAt": "2025-02-10T23:42:00Z"
+  },
+  {
+    "id": "txn_37",
+    "description": "Python programming book",
+    "amount": 48.84,
+    "category": "Books",
+    "date": "2025-02-12",
+    "createdAt": "2025-02-12T09:38:00Z",
+    "updatedAt": "2025-02-12T10:50:00Z"
+  },
+  {
+    "id": "txn_38",
+    "description": "Late night taxi",
+    "amount": 9.69,
+    "category": "Transport",
+    "date": "2025-02-16",
+    "createdAt": "2025-02-16T08:34:00Z",
+    "updatedAt": "2025-02-16T11:11:00Z"
+  },
+  {
+    "id": "txn_39",
+    "description": "Online course materials",
+    "amount": 5.45,
+    "category": "Books",
+    "date": "2025-02-19",
+    "createdAt": "2025-02-20T09:49:00Z",
+    "updatedAt": "2025-02-20T12:23:00Z"
+  },
+  {
+    "id": "txn_40",
+    "description": "Semester registration fee",
+    "amount": 93.64,
+    "category": "Fees",
+    "date": "2025-02-23",
+    "createdAt": "2025-02-23T12:40:00Z",
+    "updatedAt": "2025-02-23T16:00:00Z"
+  },
+  {
+    "id": "txn_41",
+    "description": "Paid university tuition fee",
+    "amount": 291.37,
+    "category": "Fees",
+    "date": "2025-02-27",
+    "createdAt": "2025-03-01T14:22:00Z",
+    "updatedAt": "2025-03-01T18:18:00Z"
+  },
+  {
+    "id": "txn_42",
+    "description": "Textbook purchase",
+    "amount": 99.25,
+    "category": "Books",
+    "date": "2025-03-02",
+    "createdAt": "2025-03-03T13:45:00Z",
+    "updatedAt": "2025-03-06T15:32:00Z"
+  },
+  {
+    "id": "txn_43",
+    "description": "Notebook binding",
+    "amount": 13.82,
+    "category": "Other",
+    "date": "2025-03-06",
+    "createdAt": "2025-03-08T20:19:00Z",
+    "updatedAt": "2025-03-11T23:29:00Z"
+  },
+  {
+    "id": "txn_44",
+    "description": "Semester registration fee",
+    "amount": 75.07,
+    "category": "Fees",
+    "date": "2025-03-10",
+    "createdAt": "2025-03-10T07:52:00Z",
+    "updatedAt": "2025-03-13T08:19:00Z"
+  },
+  {
+    "id": "txn_45",
+    "description": "Online course materials",
+    "amount": 35.1,
+    "category": "Books",
+    "date": "2025-03-13",
+    "createdAt": "2025-03-13T12:29:00Z",
+    "updatedAt": "2025-03-13T13:59:00Z"
+  },
+  {
+    "id": "txn_46",
+    "description": "Printing project report",
+    "amount": 5.31,
+    "category": "Other",
+    "date": "2025-03-17",
+    "createdAt": "2025-03-17T08:01:00Z",
+    "updatedAt": "2025-03-17T09:54:00Z"
+  },
+  {
+    "id": "txn_47",
+    "description": "Paid university tuition fee",
+    "amount": 297.48,
+    "category": "Fees",
+    "date": "2025-03-21",
+    "createdAt": "2025-03-21T21:37:00Z",
+    "updatedAt": "2025-03-24T22:03:00Z"
+  },
+  {
+    "id": "txn_48",
+    "description": "Concert ticket",
+    "amount": 29.33,
+    "category": "Entertainment",
+    "date": "2025-03-24",
+    "createdAt": "2025-03-24T14:11:00Z",
+    "updatedAt": "2025-03-24T16:39:00Z"
+  },
+  {
+    "id": "txn_49",
+    "description": "Late night taxi",
+    "amount": 18.8,
+    "category": "Transport",
+    "date": "2025-03-28",
+    "createdAt": "2025-03-29T07:20:00Z",
+    "updatedAt": "2025-03-29T08:10:00Z"
+  },
+  {
+    "id": "txn_50",
+    "description": "Street food dinner",
+    "amount": 26.88,
+    "category": "Food",
+    "date": "2025-04-01",
+    "createdAt": "2025-04-01T22:15:00Z",
+    "updatedAt": "2025-04-03T22:35:00Z"
+  },
+  {
+    "id": "txn_51",
+    "description": "Notebook and pens",
+    "amount": 95.26,
+    "category": "Books",
+    "date": "2025-04-04",
+    "createdAt": "2025-04-04T17:38:00Z",
+    "updatedAt": "2025-04-06T19:37:00Z"
+  },
+  {
+    "id": "txn_52",
+    "description": "Library membership renewal",
+    "amount": 96.63,
+    "category": "Books",
+    "date": "2025-04-08",
+    "createdAt": "2025-04-08T11:19:00Z",
+    "updatedAt": "2025-04-10T13:25:00Z"
+  },
+  {
+    "id": "txn_53",
+    "description": "Semester registration fee",
+    "amount": 151.44,
+    "category": "Fees",
+    "date": "2025-04-11",
+    "createdAt": "2025-04-13T21:14:00Z",
+    "updatedAt": "2025-04-16T22:16:00Z"
+  },
+  {
+    "id": "txn_54",
+    "description": "Printing project report",
+    "amount": 3.53,
+    "category": "Other",
+    "date": "2025-04-15",
+    "createdAt": "2025-04-16T13:11:00Z",
+    "updatedAt": "2025-04-16T15:10:00Z"
+  },
+  {
+    "id": "txn_55",
+    "description": "Printing project report",
+    "amount": 5.39,
+    "category": "Other",
+    "date": "2025-04-19",
+    "createdAt": "2025-04-21T14:18:00Z",
+    "updatedAt": "2025-04-21T17:07:00Z"
+  },
+  {
+    "id": "txn_56",
+    "description": "Monthly bus card",
+    "amount": 6.78,
+    "category": "Transport",
+    "date": "2025-04-22",
+    "createdAt": "2025-04-22T17:50:00Z",
+    "updatedAt": "2025-04-24T21:32:00Z"
+  },
+  {
+    "id": "txn_57",
+    "description": "Campus event entry fee",
+    "amount": 39.29,
+    "category": "Entertainment",
+    "date": "2025-04-26",
+    "createdAt": "2025-04-27T06:30:00Z",
+    "updatedAt": "2025-04-27T07:02:00Z"
+  },
+  {
+    "id": "txn_58",
+    "description": "Campus shuttle fee",
+    "amount": 16.73,
+    "category": "Transport",
+    "date": "2025-04-30",
+    "createdAt": "2025-05-01T16:53:00Z",
+    "updatedAt": "2025-05-04T18:05:00Z"
+  },
+  {
+    "id": "txn_59",
+    "description": "Python programming book",
+    "amount": 80.97,
+    "category": "Books",
+    "date": "2025-05-03",
+    "createdAt": "2025-05-03T21:39:00Z",
+    "updatedAt": "2025-05-07T01:36:00Z"
+  },
+  {
+    "id": "txn_60",
+    "description": "Concert ticket",
+    "amount": 56.87,
+    "category": "Entertainment",
+    "date": "2025-05-07",
+    "createdAt": "2025-05-09T21:25:00Z",
+    "updatedAt": "2025-05-11T23:09:00Z"
+  },
+  {
+    "id": "txn_61",
+    "description": "Exam fees",
+    "amount": 139.2,
+    "category": "Fees",
+    "date": "2025-05-11",
+    "createdAt": "2025-05-12T16:28:00Z",
+    "updatedAt": "2025-05-12T20:19:00Z"
+  },
+  {
+    "id": "txn_62",
+    "description": "Coffee and snacks",
+    "amount": 7.68,
+    "category": "Food",
+    "date": "2025-05-14",
+    "createdAt": "2025-05-16T15:45:00Z",
+    "updatedAt": "2025-05-16T18:46:00Z"
+  },
+  {
+    "id": "txn_63",
+    "description": "Late night taxi",
+    "amount": 17.02,
+    "category": "Transport",
+    "date": "2025-05-18",
+    "createdAt": "2025-05-18T10:47:00Z",
+    "updatedAt": "2025-05-19T12:06:00Z"
+  },
+  {
+    "id": "txn_64",
+    "description": "Coffee and snacks",
+    "amount": 14.26,
+    "category": "Food",
+    "date": "2025-05-21",
+    "createdAt": "2025-05-22T10:44:00Z",
+    "updatedAt": "2025-05-22T12:02:00Z"
+  },
+  {
+    "id": "txn_65",
+    "description": "Exam fees",
+    "amount": 280.04,
+    "category": "Fees",
+    "date": "2025-05-25",
+    "createdAt": "2025-05-25T08:27:00Z",
+    "updatedAt": "2025-05-26T08:52:00Z"
+  },
+  {
+    "id": "txn_66",
+    "description": "Notebook and pens",
+    "amount": 74.97,
+    "category": "Books",
+    "date": "2025-05-29",
+    "createdAt": "2025-05-29T08:59:00Z",
+    "updatedAt": "2025-05-31T10:08:00Z"
+  },
+  {
+    "id": "txn_67",
+    "description": "Textbook purchase",
+    "amount": 50.92,
+    "category": "Books",
+    "date": "2025-06-01",
+    "createdAt": "2025-06-03T12:34:00Z",
+    "updatedAt": "2025-06-04T13:53:00Z"
+  },
+  {
+    "id": "txn_68",
+    "description": "Textbook purchase",
+    "amount": 83.06,
+    "category": "Books",
+    "date": "2025-06-05",
+    "createdAt": "2025-06-07T06:33:00Z",
+    "updatedAt": "2025-06-07T08:34:00Z"
+  },
+  {
+    "id": "txn_69",
+    "description": "Taxi from city center",
+    "amount": 1.24,
+    "category": "Transport",
+    "date": "2025-06-09",
+    "createdAt": "2025-06-09T15:52:00Z",
+    "updatedAt": "2025-06-11T16:57:00Z"
+  },
+  {
+    "id": "txn_70",
+    "description": "Taxi from city center",
+    "amount": 1.22,
+    "category": "Transport",
+    "date": "2025-06-12",
+    "createdAt": "2025-06-14T07:25:00Z",
+    "updatedAt": "2025-06-14T10:24:00Z"
+  },
+  {
+    "id": "txn_71",
+    "description": "Printing project report",
+    "amount": 6.06,
+    "category": "Other",
+    "date": "2025-06-16",
+    "createdAt": "2025-06-16T09:05:00Z",
+    "updatedAt": "2025-06-17T10:50:00Z"
+  },
+  {
+    "id": "txn_72",
+    "description": "Exam fees",
+    "amount": 145.7,
+    "category": "Fees",
+    "date": "2025-06-20",
+    "createdAt": "2025-06-21T22:42:00Z",
+    "updatedAt": "2025-06-21T22:45:00Z"
+  },
+  {
+    "id": "txn_73",
+    "description": "Concert ticket",
+    "amount": 10.92,
+    "category": "Entertainment",
+    "date": "2025-06-23",
+    "createdAt": "2025-06-23T12:20:00Z",
+    "updatedAt": "2025-06-23T15:37:00Z"
+  },
+  {
+    "id": "txn_74",
+    "description": "Printing project report",
+    "amount": 8.61,
+    "category": "Other",
+    "date": "2025-06-27",
+    "createdAt": "2025-06-29T08:10:00Z",
+    "updatedAt": "2025-06-30T09:48:00Z"
+  },
+  {
+    "id": "txn_75",
+    "description": "Paid university tuition fee",
+    "amount": 339.91,
+    "category": "Fees",
+    "date": "2025-07-01",
+    "createdAt": "2025-07-01T06:24:00Z",
+    "updatedAt": "2025-07-01T06:26:00Z"
+  },
+  {
+    "id": "txn_76",
+    "description": "Online course materials",
+    "amount": 89.08,
+    "category": "Books",
+    "date": "2025-07-04",
+    "createdAt": "2025-07-06T11:12:00Z",
+    "updatedAt": "2025-07-06T11:32:00Z"
+  },
+  {
+    "id": "txn_77",
+    "description": "Lunch at cafeteria",
+    "amount": 14.24,
+    "category": "Food",
+    "date": "2025-07-08",
+    "createdAt": "2025-07-10T07:03:00Z",
+    "updatedAt": "2025-07-12T08:00:00Z"
+  },
+  {
+    "id": "txn_78",
+    "description": "Watched football match",
+    "amount": 45.54,
+    "category": "Entertainment",
+    "date": "2025-07-11",
+    "createdAt": "2025-07-12T15:51:00Z",
+    "updatedAt": "2025-07-12T16:54:00Z"
+  },
+  {
+    "id": "txn_79",
+    "description": "Concert ticket",
+    "amount": 34.57,
+    "category": "Entertainment",
+    "date": "2025-07-15",
+    "createdAt": "2025-07-15T13:08:00Z",
+    "updatedAt": "2025-07-18T13:22:00Z"
+  },
+  {
+    "id": "txn_80",
+    "description": "Campus shuttle fee",
+    "amount": 5.35,
+    "category": "Transport",
+    "date": "2025-07-19",
+    "createdAt": "2025-07-19T15:05:00Z",
+    "updatedAt": "2025-07-21T15:30:00Z"
+  },
+  {
+    "id": "txn_81",
+    "description": "Street food dinner",
+    "amount": 1.16,
+    "category": "Food",
+    "date": "2025-07-22",
+    "createdAt": "2025-07-22T13:15:00Z",
+    "updatedAt": "2025-07-25T16:30:00Z"
+  },
+  {
+    "id": "txn_82",
+    "description": "Lunch at cafeteria",
+    "amount": 19.51,
+    "category": "Food",
+    "date": "2025-07-26",
+    "createdAt": "2025-07-26T14:54:00Z",
+    "updatedAt": "2025-07-26T17:25:00Z"
+  },
+  {
+    "id": "txn_83",
+    "description": "Bus to campus",
+    "amount": 9.71,
+    "category": "Transport",
+    "date": "2025-07-30",
+    "createdAt": "2025-07-30T16:29:00Z",
+    "updatedAt": "2025-07-30T18:24:00Z"
+  },
+  {
+    "id": "txn_84",
+    "description": "Snacks during study session",
+    "amount": 17.37,
+    "category": "Food",
+    "date": "2025-08-02",
+    "createdAt": "2025-08-03T21:49:00Z",
+    "updatedAt": "2025-08-05T01:14:00Z"
+  },
+  {
+    "id": "txn_85",
+    "description": "Street food dinner",
+    "amount": 16.51,
+    "category": "Food",
+    "date": "2025-08-06",
+    "createdAt": "2025-08-08T13:26:00Z",
+    "updatedAt": "2025-08-09T14:12:00Z"
+  },
+  {
+    "id": "txn_86",
+    "description": "Paid university tuition fee",
+    "amount": 132.56,
+    "category": "Fees",
+    "date": "2025-08-10",
+    "createdAt": "2025-08-10T14:52:00Z",
+    "updatedAt": "2025-08-12T15:29:00Z"
+  },
+  {
+    "id": "txn_87",
+    "description": "Concert ticket",
+    "amount": 37.51,
+    "category": "Entertainment",
+    "date": "2025-08-13",
+    "createdAt": "2025-08-13T13:13:00Z",
+    "updatedAt": "2025-08-15T14:14:00Z"
+  },
+  {
+    "id": "txn_88",
+    "description": "Movie night with friends",
+    "amount": 3.53,
+    "category": "Entertainment",
+    "date": "2025-08-17",
+    "createdAt": "2025-08-17T09:12:00Z",
+    "updatedAt": "2025-08-17T09:40:00Z"
+  },
+  {
+    "id": "txn_89",
+    "description": "Semester registration fee",
+    "amount": 251.28,
+    "category": "Fees",
+    "date": "2025-08-20",
+    "createdAt": "2025-08-22T16:56:00Z",
+    "updatedAt": "2025-08-24T20:44:00Z"
+  },
+  {
+    "id": "txn_90",
+    "description": "Textbook purchase",
+    "amount": 74.25,
+    "category": "Books",
+    "date": "2025-08-24",
+    "createdAt": "2025-08-24T20:19:00Z",
+    "updatedAt": "2025-08-24T20:29:00Z"
+  },
+  {
+    "id": "txn_91",
+    "description": "Bus to campus",
+    "amount": 17.52,
+    "category": "Transport",
+    "date": "2025-08-28",
+    "createdAt": "2025-08-28T21:10:00Z",
+    "updatedAt": "2025-08-29T22:30:00Z"
+  },
+  {
+    "id": "txn_92",
+    "description": "Exam fees",
+    "amount": 391.55,
+    "category": "Fees",
+    "date": "2025-08-31",
+    "createdAt": "2025-08-31T16:27:00Z",
+    "updatedAt": "2025-08-31T18:22:00Z"
+  },
+  {
+    "id": "txn_93",
+    "description": "Notebook binding",
+    "amount": 9.27,
+    "category": "Other",
+    "date": "2025-09-04",
+    "createdAt": "2025-09-05T08:50:00Z",
+    "updatedAt": "2025-09-08T10:29:00Z"
+  },
+  {
+    "id": "txn_94",
+    "description": "Monthly bus card",
+    "amount": 11.69,
+    "category": "Transport",
+    "date": "2025-09-08",
+    "createdAt": "2025-09-08T10:39:00Z",
+    "updatedAt": "2025-09-11T11:18:00Z"
+  },
+  {
+    "id": "txn_95",
+    "description": "Music streaming subscription",
+    "amount": 33.41,
+    "category": "Entertainment",
+    "date": "2025-09-11",
+    "createdAt": "2025-09-11T06:28:00Z",
+    "updatedAt": "2025-09-14T06:50:00Z"
+  },
+  {
+    "id": "txn_96",
+    "description": "Weekend pizza",
+    "amount": 9.81,
+    "category": "Food",
+    "date": "2025-09-15",
+    "createdAt": "2025-09-15T06:35:00Z",
+    "updatedAt": "2025-09-15T07:20:00Z"
+  },
+  {
+    "id": "txn_97",
+    "description": "Taxi from city center",
+    "amount": 3.44,
+    "category": "Transport",
+    "date": "2025-09-19",
+    "createdAt": "2025-09-19T15:31:00Z",
+    "updatedAt": "2025-09-19T17:07:00Z"
+  },
+  {
+    "id": "txn_98",
+    "description": "Semester registration fee",
+    "amount": 387.99,
+    "category": "Fees",
+    "date": "2025-09-22",
+    "createdAt": "2025-09-23T09:26:00Z",
+    "updatedAt": "2025-09-25T10:29:00Z"
+  },
+  {
+    "id": "txn_99",
+    "description": "Snacks during study session",
+    "amount": 23.5,
+    "category": "Food",
+    "date": "2025-09-26",
+    "createdAt": "2025-09-26T21:38:00Z",
+    "updatedAt": "2025-09-27T00:37:00Z"
+  },
+  {
+    "id": "txn_100",
+    "description": "Semester registration fee",
+    "amount": 367.84,
+    "category": "Fees",
+    "date": "2025-09-30",
+    "createdAt": "2025-10-02T13:22:00Z",
+    "updatedAt": "2025-10-02T14:44:00Z"
+  }
+]

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Transactions - Student Finance Tracker</title>
+        <link rel="stylesheet" type="text/css" href="styles/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    <body>
+        <header>
+            <h1>Student Finance Tracker</h1>
+            <nav class="" id="menu">
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="transactions.html">Transactions</a></li>
+                    <li><a href="reports.html">Reports</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><button id="settings"><i class="fa-solid fa-gear"></i></button></li>
+                </ul>
+                <section class="setting hidden">
+                    <button id="addBudget">+ Set Budget</button>
+                    <button id="setCurrency">Change Currency</button>
+                </section>
+                <section class="budget-form hidden" id="budgetForm">
+                    <form id="budget-form">
+                        <h2>Set Your Budget</h2>
+
+                        <label for="budget-start">Start Date:<br>
+                            <input type="date" id="budget-start" name="budget-start" required>
+                        </label><br><br>
+
+                        <label for="budget-end">End Date:<br>
+                            <input type="date" id="budget-end" name="budget-end" required>
+                        </label><br><br>
+
+                        <label for="budget-food">Food:<br>
+                            <input type="number" id="budget-food" placeholder="Enter amount" required>
+                        </label><br><br>
+
+                        <label for="budget-books">Books:<br>
+                            <input type="number" id="budget-books" placeholder="Enter amount" required>
+                        </label><br><br>
+
+                        <label for="budget-transport">Transport:<br>
+                            <input type="number" id="budget-transport" placeholder="Enter amount" required>
+                        </label><br><br>
+
+                        <label for="budget-entertainment">Entertainment:<br>
+                            <input type="number" id="budget-entertainment" placeholder="Enter amount" required>
+                        </label><br><br>
+
+                        <label for="budget-fees">Fees:<br>
+                            <input type="number" id="budget-fees" placeholder="Enter amount" required>
+                        </label><br><br>
+
+                        <label for="budget-others">Others:<br>
+                            <input type="number" id="budget-others" placeholder="Enter amount" required>
+                        </label><br><br>
+
+                        <button type="submit">Save Budget</button>
+                        <button type="reset" id="budgetCancel">Cancel</button>
+                    </form>
+                </section>
+
+                <section class="message-popup hidden" id="budgetMessagePopup">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <p id="budgetMessage">Budget Saved!</p>
+                    <button id="closeBudgetPopup">Ok</button>
+                </section>
+            </nav>
+            <button class="menu-hidden" onclick="document.getElementById('menu').classList.toggle('hidden')">
+                ☰
+            </button>
+        </header>
+        <main class="about-main">
+            <h1>🌍 About This Project</h1>
+            <section class="about-content">
+                <article>
+                    <p>
+                        This website was created with a simple but powerful purpose to make personal finance tracking easier, clearer, and (dare we say it) a little more fun! 💸✨ 
+                        <br>It’s designed to help users visualize their spending habits, manage budgets, and stay on top of their goals without feeling overwhelmed. 
+                        <br>Every graph, button, and popup was built with care to create an intuitive, responsive, and visually pleasing experience💪💻<br><br><br>
+                    </p>
+                </article>
+                <aside>
+                    <h2>📬 Get in Touch</h2>
+                    <p>
+                        Got feedback, ideas, or just want to say hi?
+                        Feel free to reach out or explore the project further:<br><br>
+
+                        GitHub: <a href="https://github.com/Cedric-Bigwi" target="_blank">github.com/Cedric-Bigwi</a><br>
+                        Email: c.bigwihin@alustudent.com<br>
+                        Instagram: <a href="https://www.instagram.com/_bigwicedric/" target="_blank">instagram.com/_bigwicedric</a>
+                    </p>
+                    
+                </aside>
+            </section>
+        </main>
+        <footer >
+            <p>&copy; 2025 Student Finance Tracker. All rights reserved.</p>
+        </footer>
+        <script type="module" src="scripts/main.js"></script>
+    </body>
+</html>        

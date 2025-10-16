@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Transactions - Student Finance Tracker</title>
+        <link rel="stylesheet" type="text/css" href="styles/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    </head>
+    <body>
+        <header>
+            <h1>Student Finance Tracker</h1>
+            <nav>
+                <ul>
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    <li><a href="transactions.html">Transactions</a></li>
+                    <li><a href="reports.html">Reports</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><button id="settings"><i class="fa-solid fa-gear"></i></button></li>
+                </ul>
+                <section class="setting hidden">
+                    <button id="addBudget">+ Set Budget</button>
+                    <button id="setCurrency">Change Currency</button>
+                </section>
+                <section class="budget-form hidden" id="budgetForm">
+                    <form id="budget-form">
+                        <h2>Set Your Budget</h2>
+
+                        <label for="budget-start">Start Date:<br>
+                            <input type="date" id="budget-start" name="budget-start" required>
+                        </label><br><br>
+
+                        <label for="budget-end">End Date:<br>
+                            <input type="date" id="budget-end" name="budget-end" required>
+                        </label><br><br>
+
+                        <label for="budget-food">Food:<br>
+                            <input type="number" id="budget-food" placeholder="Enter amount" required>
+                        </label><br><br>
+
+                        <label for="budget-books">Books:<br>
+                            <input type="number" id="budget-books" placeholder="Enter amount" required>
+                        </label><br><br>
+
+                        <label for="budget-transport">Transport:<br>
+                            <input type="number" id="budget-transport" placeholder="Enter amount" required>
+                        </label><br><br>
+
+                        <label for="budget-entertainment">Entertainment:<br>
+                            <input type="number" id="budget-entertainment" placeholder="Enter amount" required>
+                        </label><br><br>
+
+                        <label for="budget-fees">Fees:<br>
+                            <input type="number" id="budget-fees" placeholder="Enter amount" required>
+                        </label><br><br>
+
+                        <label for="budget-others">Others:<br>
+                            <input type="number" id="budget-others" placeholder="Enter amount" required>
+                        </label><br><br>
+
+                        <button type="submit">Save Budget</button>
+                        <button type="reset" id="budgetCancel">Cancel</button>
+                    </form>
+                </section>
+
+                <section class="message-popup hidden" id="budgetMessagePopup">
+                    <i class="fa-solid fa-circle-check"></i>
+                    <p id="budgetMessage">Budget Saved!</p>
+                    <button id="closeBudgetPopup">Ok</button>
+                </section>
+            </nav>
+        </header>
+        <main>
+            <section class="report-header">
+                <h2><u>Profile Report</u></h2>
+                 <h2>Spending in Last 7 Days</h2>
+            </section>
+            <section class="report-container">
+                <div class="report" id="spending-trend-chart">
+                    <h2>Spending Trend</h2>
+                    <!-- Placeholder for chart -->
+                    <canvas id="weeklyChart"></canvas>
+                </div>
+                <div class="report" id="daily-report">
+                    <h2>Days with the most Spending</h2>
+                    <ul>
+                        <li>Monday: 0 Rwf</li>
+                        <li>Tuesday: 0 Rwf</li>
+                        <li>Wednesday: 0 Rwf</li>
+                        <li>Thursday: 0 Rwf</li>
+                        <li>Friday: 0 Rwf</li>
+                        <li>Saturday: 0 Rwf</li>
+                        <li>Sunday: 0 Rwf</li>
+                    </ul>
+                    <!-- Short message about the data analysis -->
+                    <p aria-live="polite" id="notification-container">
+                        You are remaining with 92%(100,000 Rwf) of your budgeted amount, with 10 days left.
+                    </p>
+                </div>
+            
+                <div class="report" id="category-report">
+                    <h2>Top Spending Categories</h2>
+                    <ul>
+                        <li>Food: 0 Rwf (Remaining 10% "10,000" of the budget)</li>
+                        <li>Books: 0 Rwf (Remaining 10% "10,000" of the budget)</li>
+                        <li>Transport: 0 Rwf (Remaining 10% "10,000" of the budget)</li>
+                        <li>Entertainment: 0 Rwf (Remaining 10% "10,000" of the budget)</li>
+                        <li>Fees: 0 Rwf (Remaining 10% "10,000" of the budget)</li>
+                        <li>Others: 0 Rwf (Remaining 10% "10,000" of the budget)</li>
+                    </ul>
+                </div>
+                <div class="report" id="category-trend-chart">
+                    <h2>Categories Spending Trend</h2>
+                    <!-- Placeholder for chart -->
+                    <canvas id="categoryBarChart"></canvas>
+                </div>
+            </section>
+        </main>
+        <footer >
+            <p>&copy; 2025 Student Finance Tracker. All rights reserved.</p>
+        </footer>
+        <script type="module" src="scripts/main.js"></script>
+    </body>
+</html>
