@@ -53,10 +53,16 @@ export function validateAmount(inputEl, noteEl) {
     noteEl.style.color = 'red';
     return false;
   }
-
-  noteEl.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
-  noteEl.style.color = 'green';
-  return true;
+  if(regex.amount.test(num)){
+    noteEl.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+    noteEl.style.color = 'green';
+    return true;
+    
+  }else{
+    noteEl.textContent = 'Please enter no more than decimals.';
+    noteEl.style.color = 'red';
+    return false;
+  }
 }
 
 // Validate date input
