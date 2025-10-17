@@ -10,10 +10,10 @@
     </head>
     <body>
         <header>
-            <h1>Student Finance Tracker</h1>
+            <h1><a href="index.html"><i class="fa-solid fa-wallet"></i>Student Finance Tracker</a></h1>
             <nav>
                 <ul>
-                    <li><a href="index.html">Dashboard</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
                     <li><a href="transactions.html">Transactions</a></li>
                     <li><a href="reports.html">Reports</a></li>
                     <li><a href="about.html">About</a></li>
@@ -21,7 +21,14 @@
                 </ul>
                 <section class="setting hidden">
                     <button id="addBudget">+ Set Budget</button>
-                    <button id="setCurrency">Change Currency</button>
+                    <label for="currency-select" class="currency-select" id="currency-select">Select Currency:
+                        <select id="currency-select" name="currency">
+                            <option value="" disabled selected hidden>Choose a Currency</option>
+                            <option value="USD">US Dollar (USD)</option>
+                            <option value="EUR">Euro (EUR)</option>
+                            <option value="RWF">Rwandan Francs (RWF)</option>
+                        </select>
+                    </label>
                 </section>
                 <section class="budget-form hidden" id="budgetForm">
                     <form id="budget-form">
@@ -36,26 +43,32 @@
                         </label><br><br>
 
                         <label for="budget-food">Food:<br>
+                            <span class="budgetCurrency" id="budget-others-currency">RWF</span>
                             <input type="number" id="budget-food" placeholder="Enter amount" required>
                         </label><br><br>
 
                         <label for="budget-books">Books:<br>
+                            <span class="budgetCurrency" id="budget-others-currency">RWF</span>
                             <input type="number" id="budget-books" placeholder="Enter amount" required>
                         </label><br><br>
 
                         <label for="budget-transport">Transport:<br>
+                            <span class="budgetCurrency" id="budget-others-currency">RWF</span>
                             <input type="number" id="budget-transport" placeholder="Enter amount" required>
                         </label><br><br>
 
                         <label for="budget-entertainment">Entertainment:<br>
+                            <span class="budgetCurrency" id="budget-others-currency">RWF</span>
                             <input type="number" id="budget-entertainment" placeholder="Enter amount" required>
                         </label><br><br>
 
                         <label for="budget-fees">Fees:<br>
+                            <span class="budgetCurrency" id="budget-others-currency">RWF</span>
                             <input type="number" id="budget-fees" placeholder="Enter amount" required>
                         </label><br><br>
 
                         <label for="budget-others">Others:<br>
+                            <span class="budgetCurrency" id="budget-others-currency">RWF</span>
                             <input type="number" id="budget-others" placeholder="Enter amount" required>
                         </label><br><br>
 
@@ -70,6 +83,9 @@
                     <button id="closeBudgetPopup">Ok</button>
                 </section>
             </nav>
+            <button class="menu-hidden" onclick="document.getElementById('menu').classList.toggle('hidden')">
+                ☰
+            </button>
         </header>
         <main>
             <section class="report-header">
@@ -118,9 +134,8 @@
             </section>
         </main>
         <footer >
-            <p>&copy; 2025 Student Finance Tracker. All rights reserved.</p>
+            <p><i class="fa-solid fa-wallet"></i>Student Finance Tracker. <br>&copy; 2025,&nbsp; All rights reserved.</p>
         </footer>
         <script type="module" src="scripts/main.js"></script>
     </body>
-
 </html>
