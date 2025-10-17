@@ -1,8 +1,7 @@
 // ui.js
-import { updateTransaction, deleteTransaction } from './state.js';
-import { validateForm } from './validators.js';
-
+import { deleteTransaction } from './state.js';
 import { loadTransactions, addTransaction, editTransaction } from './storage.js';
+import { currencyState, trackAmount, convertAmount, formatCurrency } from './currency.js';
 
 export function handleFormSubmit(form) {
   const category = form.querySelector('#category').value.trim();
@@ -11,10 +10,18 @@ export function handleFormSubmit(form) {
   const date = form.querySelector('#date').value;
 
   const editingId = form.dataset.editingId;
+  const selectedCurrency = currencyState.currentCurrency; // store user's selected currency
 
   if (editingId) {
     // Update the transaction in-place
-    editTransaction(editingId, { date, description, category, amount });
+    editTransaction(editingId, { 
+      date, 
+      description, 
+      category, 
+      amount, 
+      originalCurrency: selectedCurrency,
+      updated_at: new Date().toISOString()
+    });
     delete form.dataset.editingId;
   } else {
     const transactions = loadTransactions();
@@ -25,6 +32,7 @@ export function handleFormSubmit(form) {
       description,
       category,
       amount,
+      originalCurrency: selectedCurrency, // save original currency
       created_at: new Date().toISOString(),
       updated_at: null
     };
@@ -55,11 +63,15 @@ export function renderTransactionList(transactions = null) {
 
   all.forEach(txn => {
     const tr = document.createElement('tr');
+
+    // Convert amount from its original currency to current currency for display
+    const displayAmount = convertAmount(txn.amount, txn.originalCurrency || 'RWF', currencyState.currentCurrency);
+
     tr.innerHTML = `
       <td>${txn.date}</td>
       <td>${txn.description}</td>
-      <td>${capitalizeFirstLetter(txn.category)} </td>
-      <td>${txn.amount.toLocaleString()} Rwf</td>
+      <td>${capitalizeFirstLetter(txn.category)}</td>
+      <td id="txn-${txn.id}-amount">${formatCurrency(displayAmount)}</td>
       <td>
         <button data-id="${txn.id}" class="edit-btn" title="Edit"> 
           <i class="fa-solid fa-pencil"></i> 
@@ -70,8 +82,13 @@ export function renderTransactionList(transactions = null) {
       </td>
     `;
     tbody.appendChild(tr);
+
+    // Track amount for dynamic conversion
+    const amountCell = tr.querySelector(`#txn-${txn.id}-amount`);
+    trackAmount(amountCell, txn.amount, txn.originalCurrency || 'RWF');
   });
-  
+
+  // Edit buttons
   tbody.querySelectorAll('.edit-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
       const id = e.currentTarget.dataset.id;
@@ -79,6 +96,7 @@ export function renderTransactionList(transactions = null) {
     });
   });
 
+  // Delete buttons
   tbody.querySelectorAll('.delete-btn').forEach(btn => {
     btn.addEventListener('click', (e) => {
       const id = e.currentTarget.dataset.id;
@@ -89,6 +107,7 @@ export function renderTransactionList(transactions = null) {
     });
   });
 }
+
 function populateFormForEdit(id) {
   const transactions = loadTransactions();
   const txn = transactions.find(t => t.id === id);
@@ -98,8 +117,8 @@ function populateFormForEdit(id) {
   form.querySelector('#date').value = txn.date;
   form.querySelector('#description').value = txn.description;
   form.querySelector('#category').value = txn.category;
-  form.querySelector('#amount').value = txn.amount;
+  form.querySelector('#amount').value = txn.amount; // keep original value
 
   form.dataset.editingId = id; // store editing id
   document.getElementById('expenseForm').classList.remove('hidden');
-} 
+}
