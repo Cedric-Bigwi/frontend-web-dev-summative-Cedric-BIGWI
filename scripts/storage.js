@@ -1,11 +1,12 @@
 // storage.js
+
 const STORAGE_KEY = 'finance:data';
 const BUDGET_KEY = 'finance:budget';
 
 export function loadTransactions() {
   try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : [];
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : [];
   } catch (err) {
     console.error('Failed to load transactions:', err);
     return [];
