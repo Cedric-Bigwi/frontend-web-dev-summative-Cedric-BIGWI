@@ -1,56 +1,88 @@
-// Allowed currencies and conversion rates relative to USD
+// currency.js
+
 export const currencyState = {
   currentCurrency: 'USD',
   rates: {
     USD: 1,
-    EUR: 0.93, // 1 USD = 0.93 EUR (example)
-    RWF: 1400  // 1 USD = 1400 RWF (example)
+    EUR: 0.93,
+    RWF: 1400
   },
-  // Map of elementId => { originalValue, originalCurrency }
-  trackedAmounts: {}
+  trackedAmounts: {},
+  onCurrencyChangeCallbacks: [] // <-- new
 };
 
-// Format number with currency symbol
-function formatAmount(amount, currency) {
-  switch(currency) {
-    case 'USD': return `$${amount.toFixed(2)}`;
-    case 'EUR': return `€${amount.toFixed(2)}`;
-    case 'RWF': return `RWF ${amount.toFixed(0)}`;
+
+export function formatCurrency(amount) {
+  const currency = currencyState.currentCurrency;
+  switch (currency) {
+    case 'USD': return `$${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    case 'EUR': return `€${amount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+    case 'RWF': return `RWF ${amount.toLocaleString(undefined, { minimumFractionDigits: 0, maximumFractionDigits: 0 })}`;
   }
 }
 
-// Track an element's amount
+
 export function trackAmount(element, value, currency) {
-  currencyState.trackedAmounts[element.id] = { originalValue: parseFloat(value), originalCurrency: currency };
-  element.textContent = formatAmount(value, currencyState.currentCurrency);
+  currencyState.trackedAmounts[element.id] = {
+    originalValue: parseFloat(value),
+    originalCurrency: currency
+  };
+  element.textContent = formatCurrency(convertAmount(value, currency, currencyState.currentCurrency));
+
 }
 
-// Convert value from original currency to target currency
-function convertAmount(value, fromCurrency, toCurrency) {
-  const usdValue = value / currencyState.rates[fromCurrency]; // convert to USD first
+export function convertAmount(value, fromCurrency, toCurrency) {
+  const usdValue = value / currencyState.rates[fromCurrency]; 
   return usdValue * currencyState.rates[toCurrency];
 }
 
-// Update all tracked amounts
+export function updateFormCurrencies() {
+  // Expense form
+  const expenseSpan = document.getElementById('expenseFormCurrency');
+  if (expenseSpan) expenseSpan.textContent = currencyState.currentCurrency;
+
+  // Budget form (all spans with class 'budgetCurrency')
+  const budgetSpans = document.querySelectorAll('.budgetCurrency');
+  budgetSpans.forEach(span => span.textContent = currencyState.currentCurrency);
+}
+
 export function updateAllAmounts(newCurrency) {
   currencyState.currentCurrency = newCurrency;
 
   Object.keys(currencyState.trackedAmounts).forEach(id => {
     const elem = document.getElementById(id);
-    if(!elem) return;
+    if (!elem) return;
 
     const { originalValue, originalCurrency } = currencyState.trackedAmounts[id];
     const newValue = convertAmount(originalValue, originalCurrency, newCurrency);
-    elem.textContent = formatAmount(newValue, newCurrency);
+    elem.textContent = formatCurrency(newValue);
   });
+
+  updateFormCurrencies();
+
+  // Notify listeners to re-render messages
+  currencyState.onCurrencyChangeCallbacks.forEach(cb => cb(newCurrency));
 }
 
-// Setup a dropdown selector
+// Register callback for currency change
+export function onCurrencyChange(callback) {
+  currencyState.onCurrencyChangeCallbacks.push(callback);
+}
+
 export function setupCurrencySwitcher(selectId) {
   const select = document.getElementById(selectId);
-  if(!select) return;
+  if (!select) return;
+
+  // Restore previous selection from localStorage
+  const savedCurrency = localStorage.getItem('selectedCurrency');
+  if (savedCurrency && currencyState.rates[savedCurrency]) {
+    select.value = savedCurrency;
+    updateAllAmounts(savedCurrency);
+  }
 
   select.addEventListener('change', (e) => {
-    updateAllAmounts(e.target.value);
+    const newCurrency = e.target.value;
+    localStorage.setItem('selectedCurrency', newCurrency); // save selection
+    updateAllAmounts(newCurrency);
   });
 }
