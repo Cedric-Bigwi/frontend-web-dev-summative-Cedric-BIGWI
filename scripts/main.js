@@ -1,3 +1,5 @@
+//main.js
+
 import { renderTransactionList, handleFormSubmit } from './ui.js';
 import { enableTableSort } from './state.js';
 import { validateDescription, validateAmount, validateDate, validateForm } from './validators.js';
@@ -5,7 +7,7 @@ import { searchTransactions } from './search.js';
 import { handleBudgetFormSubmit, deleteBudget, hasActiveBudget} from './budget.js';
 import { renderBudgetGraphs } from './budgetGraph.js';
 import { refreshBudgetMessages } from './budgetMessage.js';
-import { trackAmount, setupCurrencySwitcher } from './currency.js';
+import { setupCurrencySwitcher, onCurrencyChange } from './currency.js';
 
 console.log('App initialized');
 
@@ -17,6 +19,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   renderTransactionList();
   renderBudgetGraphs();
+  setupCurrencySwitcher('currency-select');
+  onCurrencyChange(() => {
+    renderTransactionList();
+    refreshBudgetMessages();
+    renderBudgetGraphs();
+  });
   refreshBudgetMessages();
 
   if(table){
@@ -64,6 +72,9 @@ document.addEventListener('DOMContentLoaded', () => {
         if (choice) {
           deleteBudget();
           budgetFormSection.classList.remove('hidden');
+          renderBudgetCapMessages();
+          renderBudgetGraphs();
+          refreshBudgetMessages();
         }
       } else {
         budgetFormSection.classList.remove('hidden');
@@ -124,5 +135,5 @@ document.addEventListener('DOMContentLoaded', () => {
     if(closePopup)closePopup.addEventListener('click', () => popup.classList.add('hidden'));
     if(cancelBtn)cancelBtn.addEventListener('click', () => formSection.classList.add('hidden'));
   }
-
+  
 });
