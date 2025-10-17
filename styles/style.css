@@ -10,7 +10,7 @@ html{
     margin: 0; 
     padding: 0; 
     font-family: Georgia, 'Times New Roman', Times, serif; 
-    color: black;
+    color: #003f4f;
 }
 body{
     backdrop-filter: blur(8px);
@@ -26,12 +26,13 @@ header{
     display: flex; 
     padding: 2rem 0 2rem 0; 
     text-align: center; 
+    justify-content: space-between;
 }
 header h1{
     font-family: Gabriola, serif;
     font-size: 2rem; 
     margin: 0; 
-    padding: 1rem 20rem 1rem 5rem;
+    padding: 1rem;
 }
 header li{
     display: inline;
@@ -41,7 +42,7 @@ header a{
     padding: 1rem 2rem;  
     border-radius: 3rem;
 }
-header a:hover{
+nav a:hover{
     background-color: rgb(0, 238, 255); 
 }
 nav{
@@ -71,8 +72,7 @@ nav ul button:hover{
   border-radius: 1rem;  
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-
-.setting button {
+.setting button, .currency-select {
   background-color:  rgb(0, 238, 255);
   border: none;
   padding: .5rem;
@@ -81,10 +81,27 @@ nav ul button:hover{
   font-size: 1rem;
   transition: background-color 0.5s;
 }
-.setting button:hover {
+.setting button:hover,.currency-select select:hover {
   background-color: wheat;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   padding: 1rem;
+}
+.currency-select{
+    display: flex;
+    flex-direction: column;
+    font-size: 1rem;
+}
+.currency-select select{
+    border-radius: 2rem;
+    padding: .3rem;
+    width: 10rem;
+    border: none;
+    margin: .5rem 0 0 0;
+    cursor: pointer;
+    transition: background-color 0.5s;
+}
+.currency-select select option{
+    background-color: aliceblue;
 }
 .expense-form{
     display: flex;  
@@ -271,6 +288,53 @@ nav ul button:hover{
 .hidden {
   display: none;
 }
+/* Index Specific Styles*/
+.hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 2rem;
+  text-align: center;
+  color: #003f4f;
+}
+.hero-content {
+  max-width: 700px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 2rem 2.5rem;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 1.2s ease;
+}
+.hero-content h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #004f55;
+}
+.hero-content p {
+  margin-bottom: 1rem;
+  line-height: 1.6;
+  font-size: 1.05rem;
+}
+.tagline {
+  font-style: italic;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+.btn-primary {
+  display: inline-block;
+  background: #007b83;
+  color: white;
+  text-decoration: none;
+  padding: 0.8rem 1.8rem;
+  font-weight: 600;
+  border-radius: 30px;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+.btn-primary:hover {
+  transform: scale(1.05);
+  background: #00a9a5;
+}
 /* Dashboard Specific Styles */
 .summary-cards{
     display: flex; 
@@ -284,6 +348,7 @@ nav ul button:hover{
     width: 15%; 
     text-align: center; 
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    overflow: hidden; 
 }
 .card p{
     font-size: 1.5rem; 
@@ -360,6 +425,21 @@ nav ul button:hover{
     margin: 0; 
     text-align: center;
     padding: 1rem 0 0 0;
+}
+#load-seed{
+    margin-left: 25rem;
+    padding: 1rem 2rem; 
+    font-size: 1.3rem; 
+    width: 30%;
+    border-radius: 1rem; 
+    background-color: rgb(0, 238, 255); 
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: .2s;
+}
+#load-seed:hover{
+    box-shadow: 0 20px 30px 0 rgba(0, 0, 0, 0.3), 0 8px 24px 0 rgba(0, 0, 0, 0.25);
+    background-color: beige;
+    width: 40%;
 }
 .table-header{
     display: flex;
@@ -487,6 +567,7 @@ thead th.active span.icon-arrow{
 
 thead th.asc span.icon-arrow{
     transform: rotate(180deg);
+    
 }
 
 thead th.active,tbody td.active {
@@ -573,7 +654,7 @@ footer{
 }
 
 
-@media (max-width: 1024px) {
+@media (max-width: 1093px) {
     header{
         padding: .5rem;
         justify-content: space-between;
@@ -659,6 +740,13 @@ footer{
 }
 
 @media (max-width: 768px) {
+    .menu-hidden{
+        display: inline;
+        height: 5rem;
+        width: 2rem;
+        background-color: rgb(0, 238, 255); 
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
     header h1{
     font-size: 1.5rem;  
     padding: 0rem ;
