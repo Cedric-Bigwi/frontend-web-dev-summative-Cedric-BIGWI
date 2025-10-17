@@ -2,6 +2,7 @@
 
 import { loadTransactions,saveBudget, loadBudget, clearBudget } from './storage.js';
 import { renderBudgetGraphs } from './budgetGraph.js';
+import { currencyState, convertAmount } from './currency.js';
 
 
 let budgetState = loadBudget() || {};
@@ -14,9 +15,7 @@ function showPopupMessage(text, color = 'black') {
   popup.classList.remove('hidden');
 }
 
-/**
- * Validate budget form before saving
- */
+
 function validateBudgetForm(form) {
   const start = form.querySelector('#budget-start').value;
   const end = form.querySelector('#budget-end').value;
@@ -66,14 +65,8 @@ function validateBudgetForm(form) {
   return { start, end, categories: amounts };
 }
 
-/**
- * Handle form submission
- */
-/**
- * Handle form submission
- */
+
 export function handleBudgetFormSubmit(form) {
-  // Prevent creating a new budget if there is an active one
   if (hasActiveBudget()) {
     showPopupMessage(
       `⚠ A budget is already active (${budgetState.start} → ${budgetState.end}). ` +
@@ -86,26 +79,33 @@ export function handleBudgetFormSubmit(form) {
   const validated = validateBudgetForm(form);
   if (!validated) return;
 
+  const selectedCurrency = currencyState.currentCurrency; // <-- capture selected currency
+
   const budget = {
     start: validated.start,
     end: validated.end,
-    categories: validated.categories,
+    categories: {},       // we'll store in selected currency
+    currency: selectedCurrency // store the currency
   };
 
-  // Calculate total
+  // Convert each category amount to the selected currency
+  Object.keys(validated.categories).forEach(cat => {
+    budget.categories[cat] = parseFloat(validated.categories[cat]); // keep as is (already input in selected currency)
+  });
+
+  // Calculate total in selected currency
   budget.total = Object.values(budget.categories).reduce((a, b) => a + b, 0);
 
   saveBudget(budget);
   budgetState = budget;
 
-  // show success message
-  showPopupMessage(`✅ Budget saved! Total: ${budget.total.toLocaleString()} Rwf`, 'green');
+  showPopupMessage(
+    `✅ Budget saved! Total: ${budget.total.toLocaleString()} ${budget.currency}`,
+    'green'
+  );
 
-  // Reset and hide form
   form.reset();
   document.getElementById('budgetForm').classList.add('hidden');
-
-  // Render graphs safely
   renderBudgetGraphs();
 }
 
