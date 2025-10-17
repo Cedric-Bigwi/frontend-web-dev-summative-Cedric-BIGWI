@@ -107,5 +107,7 @@ Open dashboard.html in your browser.
     
     All UI and logic code is original. AI was only used for documentation and seed data generation, not code.
 
+[![Watch the demo](https://img.youtube.com/vi/DPHs7oa9-Jo/maxresdefault.jpg)](https://youtu.be/DPHs7oa9-Jo)
+
 Code written by: 👨🏻‍🎓 CÉDRIC BIGWI HINDURA
 © 2025 Student Finance Tracker
