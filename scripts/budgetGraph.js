@@ -1,5 +1,6 @@
 // budgetGraph.js
 import { loadTransactions, loadBudget } from './storage.js';
+import { convertAmount, currencyState, formatCurrency } from './currency.js';
 
 let weeklyChartInstance = null;
 let categoryBarChartInstance = null;
@@ -9,9 +10,6 @@ function capitalizeFirstLetter(s) {
   return s ? s.charAt(0).toUpperCase() + s.slice(1) : '';
 }
 
-/**
- * Safely render all budget-related visuals
- */
 export function renderBudgetGraphs() {
   const transactions = loadTransactions();
   const budget = loadBudget();
@@ -33,9 +31,6 @@ export function renderBudgetGraphs() {
   if (totalCanvas) renderTotalBudgetChart(transactions, budget);
 }
 
-/**
- * Display "No budget" message inside canvas
- */
 function showNoBudgetMessage(canvas, msg) {
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -44,9 +39,6 @@ function showNoBudgetMessage(canvas, msg) {
   ctx.fillText(msg, canvas.width / 2, canvas.height / 2);
 }
 
-/**
- * Weekly Line Chart — Spending in last 7 days
- */
 function renderWeeklyLineChart(transactions) {
   const now = new Date();
   const last7days = Array.from({ length: 7 }, (_, i) => {
@@ -56,8 +48,12 @@ function renderWeeklyLineChart(transactions) {
   });
 
   const dailyTotals = last7days.map(date =>
-    transactions.filter(t => t.date === date)
-      .reduce((sum, t) => sum + t.amount, 0)
+    transactions
+      .filter(t => t.date === date)
+      .reduce(
+        (sum, t) => sum + convertAmount(t.amount, t.originalCurrency || 'RWF', currencyState.currentCurrency),
+        0
+      )
   );
 
   const ctx = document.getElementById('weeklyChart')?.getContext('2d');
@@ -68,58 +64,68 @@ function renderWeeklyLineChart(transactions) {
     type: 'line',
     data: {
       labels: last7days,
-      datasets: [{
-        label: 'Daily Spending (Rwf)',
-        data: dailyTotals,
-        borderColor: '#36A2EB',
-        backgroundColor: '#9AD0F5',
-        fill: true,
-        tension: 0.3,
-        pointRadius: 4
-      }]
+      datasets: [
+        {
+          label: `Daily Spending (${currencyState.currentCurrency})`,
+          data: dailyTotals,
+          borderColor: '#36A2EB',
+          backgroundColor: '#9AD0F5',
+          fill: true,
+          tension: 0.3,
+          pointRadius: 4
+        }
+      ]
     },
     options: {
       responsive: true,
-      plugins: { legend: { display: true }, tooltip: { enabled: true } },
+      plugins: {
+        legend: { display: true },
+        tooltip: {
+          callbacks: {
+            label: ctx => `${ctx.dataset.label}: ${formatCurrency(ctx.raw, currencyState.currentCurrency)}`
+          }
+        }
+      },
       scales: { y: { beginAtZero: true } }
     }
   });
 }
 
-/**
- * Category Bar Chart — Spending vs Budget
- */
 function renderCategoryBarChart(transactions, budget) {
   const spent = {};
   Object.keys(budget.categories).forEach(c => spent[c] = 0);
 
   transactions.forEach(txn => {
-    if (spent.hasOwnProperty(txn.category)) spent[txn.category] += txn.amount;
+    if (spent.hasOwnProperty(txn.category)) {
+      spent[txn.category] += convertAmount(txn.amount, txn.originalCurrency || 'RWF', currencyState.currentCurrency);
+    }
   });
 
   const labels = Object.keys(spent).map(capitalizeFirstLetter);
   const spentValues = Object.values(spent);
-  const budgetValues = Object.values(budget.categories);
+  const budgetValues = Object.values(budget.categories).map(val =>
+    convertAmount(val, budget.currency || 'RWF', currencyState.currentCurrency)
+  );
 
   const ctx = document.getElementById('categoryBarChart')?.getContext('2d');
   if (!ctx) return;
-  if (window.categoryBarChartInstance) window.categoryBarChartInstance.destroy();
+  if (categoryBarChartInstance) categoryBarChartInstance.destroy();
 
-  window.categoryBarChartInstance = new Chart(ctx, {
+  categoryBarChartInstance = new Chart(ctx, {
     type: 'bar',
     data: {
       labels,
       datasets: [
         {
-          label: 'Budget',
+          label: `Budget (${currencyState.currentCurrency})`,
           data: budgetValues,
-          backgroundColor: 'rgb(0, 238, 255)', // cyan budget bars
+          backgroundColor: 'rgb(0, 238, 255)',
         },
         {
-          label: 'Spent',
+          label: `Spent (${currencyState.currentCurrency})`,
           data: spentValues,
           backgroundColor: spentValues.map((v, i) =>
-            v <= budgetValues[i] ? '#4BC0C0' : '#FF6384' // green if under, red if over
+            v <= budgetValues[i] ? '#4BC0C0' : '#FF6384'
           ),
         },
       ],
@@ -130,44 +136,31 @@ function renderCategoryBarChart(transactions, budget) {
         legend: {
           position: 'top',
           labels: {
-            generateLabels: (chart) => {
-              // Custom legend items
-              return [
-                {
-                  text: 'Budget',
-                  fillStyle: 'rgb(0, 238, 255)',
-                },
-                {
-                  text: 'Spent (Under Budget)',
-                  fillStyle: '#4BC0C0',
-                },
-                {
-                  text: 'Spent (Over Budget)',
-                  fillStyle: '#FF6384',
-                },
-              ];
-            },
-          },
+            generateLabels: (chart) => [
+              { text: 'Budget', fillStyle: 'rgb(0, 238, 255)' },
+              { text: 'Spent (Under Budget)', fillStyle: '#4BC0C0' },
+              { text: 'Spent (Over Budget)', fillStyle: '#FF6384' },
+            ]
+          }
         },
         tooltip: {
           callbacks: {
-            label: (ctx) => `${ctx.dataset.label}: ${ctx.raw.toLocaleString()} Rwf`,
-          },
-        },
+            label: ctx => `${ctx.dataset.label}: ${formatCurrency(ctx.raw, currencyState.currentCurrency)}`
+          }
+        }
       },
-      scales: {
-        y: { beginAtZero: true },
-      },
+      scales: { y: { beginAtZero: true } }
     },
   });
 }
 
-/**
- * Total Spending vs Remaining Budget — Dashboard Overview
- */
 function renderTotalBudgetChart(transactions, budget) {
-  const totalSpent = transactions.reduce((sum, t) => sum + t.amount, 0);
-  const totalBudget = budget.total;
+  const totalSpent = transactions.reduce(
+    (sum, t) => sum + convertAmount(t.amount, t.originalCurrency || 'RWF', currencyState.currentCurrency),
+    0
+  );
+
+  const totalBudget = convertAmount(budget.total, budget.currency || 'RWF', currencyState.currentCurrency);
   const remaining = Math.max(totalBudget - totalSpent, 0);
 
   const ctx = document.getElementById('totalBudgetChart')?.getContext('2d');
@@ -189,20 +182,19 @@ function renderTotalBudgetChart(transactions, budget) {
         legend: { position: 'bottom' },
         tooltip: {
           callbacks: {
-            label: ctx => `${ctx.label}: ${ctx.raw.toLocaleString()} Rwf`
+            label: ctx => `${ctx.label}: ${formatCurrency(ctx.raw, currencyState.currentCurrency)}`
           }
         }
       }
     }
   });
 
-  // Update dashboard text summary
   const msg = document.getElementById('dashboardSummary');
   if (msg) {
     msg.innerHTML = `
-      <strong>Total Budget:</strong> ${totalBudget.toLocaleString()} Rwf<br>
-      <strong>Total Spent:</strong> ${totalSpent.toLocaleString()} Rwf<br>
-      <strong>Remaining:</strong> ${remaining.toLocaleString()} Rwf
+      <strong>Total Budget:</strong> ${formatCurrency(totalBudget, currencyState.currentCurrency)}<br>
+      <strong>Total Spent:</strong> ${formatCurrency(totalSpent, currencyState.currentCurrency)}<br>
+      <strong>Remaining:</strong> ${formatCurrency(remaining, currencyState.currentCurrency)}
     `;
     msg.style.color = remaining > totalBudget * 0.1 ? 'green' : 'red';
   }
