@@ -1,6 +1,6 @@
-// budgetMessage.js 
-
+// budgetMessage.js
 import { loadTransactions, loadBudget } from './storage.js';
+import { currencyState, convertAmount, formatCurrency } from './currency.js';
 
 function capitalize(str) {
   if (!str) return '';
@@ -42,26 +42,34 @@ export function getBudgetStats() {
   transactions.forEach(txn => {
     const txnDate = new Date(txn.date);
     if (txnDate >= start && txnDate <= end) {
-      if (spent.hasOwnProperty(txn.category)) spent[txn.category] += txn.amount;
+      // Convert transaction amount from original currency to current selected currency
+      const convertedAmount = convertAmount(txn.amount, txn.originalCurrency || 'RWF', currencyState.currentCurrency);
+
+      if (spent.hasOwnProperty(txn.category)) spent[txn.category] += convertedAmount;
 
       const diffDays = (now - txnDate) / (1000 * 60 * 60 * 24);
       if (diffDays <= 7) {
         const dayName = txnDate.toLocaleDateString('en-US', { weekday: 'long' });
-        dailySpending[dayName] += txn.amount;
+        dailySpending[dayName] += convertedAmount;
       }
     }
   });
 
   const totalSpent = Object.values(spent).reduce((a, b) => a + b, 0);
-  const totalBudget = budget.total || Object.values(budget.categories).reduce((a, b) => a + b, 0);
+
+  // Use the budget's original currency for conversion
+  const budgetCurrency = budget.currency || 'RWF';
+
+  const totalBudget = convertAmount(budget.total, budgetCurrency, currencyState.currentCurrency);
   const totalRemaining = totalBudget - totalSpent;
   const percentRemaining = totalBudget ? Math.max(0, Math.round((totalRemaining / totalBudget) * 100)) : 0;
   const daysLeft = Math.max(0, daysBetween(now, end));
 
   const categories = {};
   Object.keys(budget.categories).forEach(cat => {
-    const remaining = budget.categories[cat] - spent[cat];
-    const percent = budget.categories[cat] ? Math.round((remaining / budget.categories[cat]) * 100) : 0;
+    const convertedCategoryBudget = convertAmount(budget.categories[cat], budgetCurrency, currencyState.currentCurrency);
+    const remaining = convertedCategoryBudget - spent[cat];
+    const percent = convertedCategoryBudget ? Math.round((remaining / convertedCategoryBudget) * 100) : 0;
     categories[cat] = {
       spent: spent[cat],
       remaining,
@@ -72,6 +80,7 @@ export function getBudgetStats() {
   return { totalBudget, totalSpent, totalRemaining, percentRemaining, daysLeft, categories, dailySpending };
 }
 
+
 // Dashboard message
 export function renderDashboardMessage() {
   const stats = getBudgetStats();
@@ -80,13 +89,13 @@ export function renderDashboardMessage() {
   if (!keyBreakdown) return;
 
   keyBreakdown.querySelector('ul').innerHTML = `
-    <li>Budgeted Amount: ${stats.totalBudget.toLocaleString()} Rwf</li>
-    <li>Amount Spent: ${stats.totalSpent.toLocaleString()} Rwf</li>
+    <li>Budgeted Amount: ${formatCurrency(stats.totalBudget)}</li>
+    <li>Amount Spent: ${formatCurrency(stats.totalSpent)}</li>
   `;
 
   const msgEl = keyBreakdown.querySelector('#notification-container');
   msgEl.textContent = stats.totalBudget > 0
-    ? `You are remaining with ${stats.percentRemaining}% (${stats.totalRemaining.toLocaleString()} Rwf) of your budgeted amount, with ${stats.daysLeft} day(s) left.`
+    ? `You are remaining with ${stats.percentRemaining}% (${formatCurrency(stats.totalRemaining)}) of your budgeted amount, with ${stats.daysLeft} day(s) left.`
     : `No budget set yet. Please create a budget to track your spending.`;
 }
 
@@ -102,7 +111,7 @@ export function renderReportMessage() {
   if (categoryReport) {
     categoryReport.querySelector('ul').innerHTML = sortedCategories.map(([cat, catStats]) => {
       const remainingPercent = Math.max(0, catStats.percent);
-      return `<li>${capitalize(cat)}: ${catStats.spent.toLocaleString()} Rwf (Remaining ${remainingPercent}% "${catStats.remaining.toLocaleString()}")</li>`;
+      return `<li>${capitalize(cat)}: ${formatCurrency(catStats.spent)} (Remaining ${remainingPercent}% - ${formatCurrency(catStats.remaining)})</li>`;
     }).join('') || `<li>No budget set yet.</li>`;
   }
 
@@ -113,12 +122,12 @@ export function renderReportMessage() {
   const dailyReport = document.getElementById('daily-report');
   if (dailyReport) {
     dailyReport.querySelector('ul').innerHTML = sortedDays.map(([day, amount]) => {
-      return `<li>${day}: ${amount.toLocaleString()} Rwf</li>`;
+      return `<li>${day}: ${formatCurrency(amount)}</li>`;
     }).join('') || `<li>No spending data available.</li>`;
 
     const msgEl = dailyReport.querySelector('#notification-container');
     msgEl.textContent = stats.totalBudget > 0
-      ? `You are remaining with ${stats.percentRemaining}% (${stats.totalRemaining.toLocaleString()} Rwf) of your budgeted amount, with ${stats.daysLeft} day(s) left.`
+      ? `You are remaining with ${stats.percentRemaining}% (${formatCurrency(stats.totalRemaining)}) of your budgeted amount, with ${stats.daysLeft} day(s) left.`
       : `No budget set yet.`;
   }
 }
@@ -140,12 +149,11 @@ export function renderBudgetCapMessages() {
     const p = card.querySelector('p');
     if (!h2 || !p) return;
 
-    const catName = h2.textContent.replace(':','').toLowerCase();
+    const catName = h2.textContent.replace(':', '').toLowerCase();
     if (stats.categories[catName]) {
-      p.textContent = `${stats.categories[catName].spent.toLocaleString()} Rwf`;
+      p.textContent = `${formatCurrency(stats.categories[catName].spent)}`;
     } else {
-      p.textContent = '0 Rwf';
+      p.textContent = formatCurrency(0);
     }
   });
 }
-
