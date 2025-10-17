@@ -13,10 +13,10 @@
 
     <body>
         <header>
-            <h1>Student Finance Tracker</h1>
+            <h1><a href="index.html"><i class="fa-solid fa-wallet"></i>Student Finance Tracker</a></h1>
             <nav>
                 <ul>
-                    <li><a href="index.html">Dashboard</a></li>
+                    <li><a href="dashboard.html">Dashboard</a></li>
                     <li><a href="transactions.html">Transactions</a></li>
                     <li><a href="reports.html">Reports</a></li>
                     <li><a href="about.html">About</a></li>
@@ -24,7 +24,14 @@
                 </ul>
                 <section class="setting hidden">
                     <button id="addBudget">+ Set Budget</button>
-                    <button id="setCurrency">Change Currency</button>
+                    <label for="currency-select" class="currency-select">Select Currency:
+                        <select id="currency-select" name="currency">
+                            <option value="" disabled selected hidden>Choose a Currency</option>
+                            <option value="USD">US Dollar (USD)</option>
+                            <option value="EUR">Euro (EUR)</option>
+                            <option value="RWF">Rwandan Francs (RWF)</option>
+                        </select>
+                    </label>
                 </section>
                 <section class="budget-form hidden" id="budgetForm">
                     <form id="budget-form">
@@ -73,150 +80,29 @@
                     <button id="closeBudgetPopup">Ok</button>
                 </section>
             </nav>
+            <button class="menu-hidden" onclick="document.getElementById('menu').classList.toggle('hidden')">
+                ☰
+            </button>
         </header>
-        <main>
-            <section class="summary-cards">
-                <div class="card">
-                    <h2>Food:</h2>
-                    <p>0 Rwf</p> 
-                </div>
-                <div class="card">
-                    <h2>Books:</h2>
-                    <p>0 Rwf</p>
-                </div>
-                <div class="card">
-                    <h2>Transport:</h2>
-                    <p>0 Rwf</p> 
-                </div>
-                <div class="card">
-                    <h2>Entertainment:</h2>
-                    <p>0 Rwf</p>
-                </div>
-                <div class="card">
-                    <h2>Fees:</h2>
-                    <p>0 Rwf</p>
-                </div>
-                <div class="card">
-                    <h2>Others:</h2>
-                    <p>0 Rwf</p>
-                </div>
-                
-            </section>
-            <button id="addTransaction" style="margin-left: 32%;">+ Add Expense</button> 
-            <section class="expense-form hidden" id="expenseForm">
-                <form id="transaction-form">
-                    <h2>Add New Expense</h2>
-                    <label for="category">Category:<br>
-                        <select id="category" name="category" required>
-                            <option value="" disabled selected>
-                                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; -----Choose a Category-----
-                            </option>
-                            <option value="food">Food</option>
-                            <option value="books">Books</option>
-                            <option value="transport">Transport</option>
-                            <option value="entertainment">Entertainment</option>
-                            <option value="fees">Fees</option>
-                            <option value="others">Others</option>
-                        </select>
-                    </label><br><br>
-                    <label for="description">Description:<br>
-                        <input type="text" placeholder="Describe your Expense..." id="description" name="description">
-                        <span id="descriptionNote"></span>
-                    </label><br><br>
-                    <label for="amount">Amount:<br>
-                        <span id="currency" style="color: black; font-size: 1.2rem; margin-left: 1rem;">Rwf</span>
-                        <input type="number" placeholder="Enter Amount..." id="amount" name="amount" >
-                        <span id="amountNote"></span>
-                    </label><br><br>
-                    <label for="data">Date:<br>
-                        <input type="date" id="date" name="date">
-                        <span id="dateNote"></span> 
-                    </label><br><br>
-                    <button type="submit">Save</button>
-                    <button type="reset">Reset</button>
-                    <button type="reset" id="cancel">Cancel</button>
-                </form>
-            </section>
-            <section class="summary-visuals">
-                <div class="chart" id="spending-trend-chart">
-                    <canvas id="totalBudgetChart"></canvas>
-                </div>
-                <div class="breakdown" id="key-breakdown">
-                    <h2>Key Breakdown</h2>
-                    <ul>
-                        <li>Budgeted Amount: 0 Rwf</li>
-                        <li>Amount Spent: 0 Rwf</li>
-                    </ul>
-                    <p aria-live="polite" id="notification-container"></p>
-                </div>
-            </section>
-            <section class="recent-transactions">
-                <div class="table-header">
-                    <h2>Recent Transactions</h2>
-                    <div class="search-container">
-                        <i class="fa-solid fa-magnifying-glass-dollar"></i>
-                        <input type="text" placeholder="Search Transactions" id="myInput">  
-                    </div>                 
-                </div>
-                <div class="table_body">
-                    <table id="transactionTable">
-                        <thead>
-                            <tr>
-                                <th>Date<span class="icon-arrow">&UpArrow;</span></th>
-                                <th>Description<span class="icon-arrow">&UpArrow;</span></th>
-                                <th>Category<span class="icon-arrow">&UpArrow;</span></th>
-                                <th>Amount<span class="icon-arrow">&UpArrow;</span></th>
-                                <th></th>
-                            </tr> 
-                        </thead>
-                        <tbody id="transaction-list">
-                            <!-- Placeholder for recent transactions -->
-                            <tr>
-                                <td>2024-01-01</td>
-                                <td>Sample Transaction 1</td>
-                                <td>Food</td>
-                                <td>500 Rwf</td>
-                                <td><i class="fa-solid fa-pencil"></i>&nbsp;&nbsp;<i class="fa-solid fa-trash"></i></td>
-                            </tr>
-                            <tr>
-                                <td>2024-01-02</td>
-                                <td>Sample Transaction 2</td>
-                                <td>Books</td>
-                                <td>1500 Rwf</td>
-                            </tr>
-                            <tr>
-                                <td>2024-01-03</td>
-                                <td>Sample Transaction 3</td>
-                                <td>Transport</td>
-                                <td>300 Rwf</td>
-                            </tr>
-                            <tr>
-                                <td>2024-01-04</td>
-                                <td>Sample Transaction 4</td>
-                                <td>Entertainment</td>
-                                <td>800 Rwf</td>
-                            </tr>
-                            <tr>
-                                <td>2024-01-05</td>
-                                <td>Sample Transaction 5</td>
-                                <td>Fees</td>
-                                <td>2000 Rwf</td>
-                            </tr>
-                            <tr>
-                                <td>2024-01-06</td>
-                                <td>Sample Transaction 6</td>
-                                <td>Others</td>
-                                <td>400 Rwf</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </section>
+        <main class="hero">
+             <div class="hero-content">
+                <h2>💰 Take Control of Your Finances  The Smart Way</h2>
+                <p>
+                    Welcome to your <strong>personal finance companion</strong>, where budgeting meets simplicity and insight! 🌟 
+                    Track your expenses, set budgets, and visualize your spending habits like never before. 
+                    With sleek graphs, smart summaries, and instant updates, you’ll always know where your money’s going — and how to make it go further.
+                </p>
+
+                <p class="tagline"><em>Plan smarter. Spend wiser. Live better.</em> 💡✨</p>
+
+                <a href="dashboard.html" class="btn-primary">
+                    <i class="fa-solid fa-chart-line"></i> View Dashboard
+                </a>
+            </div>
         </main>
         <footer >
-            <p>&copy; 2025 Student Finance Tracker. All rights reserved.</p>
+            <p><i class="fa-solid fa-wallet"></i>Student Finance Tracker. <br>&copy; 2025,&nbsp; All rights reserved.</p>
         </footer>
         <script type="module" src="scripts/main.js"></script>
     </body>
-
 </html>
